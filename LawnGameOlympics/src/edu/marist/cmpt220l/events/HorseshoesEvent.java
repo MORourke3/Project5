@@ -12,7 +12,7 @@ public class HorseshoesEvent extends Event {
      * Construct a horseshoes object
      */
     public HorseshoesEvent(Team[] teams) {
-        super("Horseshoes", 11, false, 40);
+        super("Horseshoes", 11, false, 40, teams);
     }
 
     /**

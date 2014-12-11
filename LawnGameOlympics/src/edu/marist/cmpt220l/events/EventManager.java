@@ -1,7 +1,5 @@
 package edu.marist.cmpt220l.events;
 
-import edu.marist.cmpt220l.Bracketing.Queue;
-import edu.marist.cmpt220l.teams.Team;
 import edu.marist.cmpt220l.teams.TeamManager;
 
 /**
@@ -32,12 +30,5 @@ public class EventManager {
     public Event[] getEvents() {
         return events;
     }
-
-    public Event getOne(int A){
-
-        return events[A];
-
-    }
-
 
 }

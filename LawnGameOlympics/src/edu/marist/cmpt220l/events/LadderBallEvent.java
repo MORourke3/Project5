@@ -12,7 +12,7 @@ public class LadderBallEvent extends Event {
      * Construct the ladder ball event
      */
     public LadderBallEvent(Team[] teams) {
-        super("Ladder Ball", 21, true, 15);
+        super("Ladder Ball", 21, true, 15, teams);
     }
 
     /**

@@ -1,6 +1,7 @@
 package edu.marist.cmpt220l.Bracketing;
 
 import edu.marist.cmpt220l.Stacking.Stack;
+import edu.marist.cmpt220l.events.Event;
 import edu.marist.cmpt220l.teams.Team;
 
 /**
@@ -11,8 +12,7 @@ public class Queue {
     // variables used to make the list logic easier
     private QueueItem head;
     private QueueItem tail;
-    private QueueItem currItem;
-    private int i = 0;
+    private int count;
 
     // method used to add a team to the queue
     public void enqueue(Team team){
@@ -21,15 +21,15 @@ public class Queue {
 
         if(head == null){
 
-            head = tail = currItem = A;
+            head = tail = A;
 
         }else{
 
+            tail.next = A;
             tail = A;
-            currItem.setNext(A);
-            currItem = A;
 
         }
+        count++;
     }
 
     // method used to remove a team from the queue
@@ -44,70 +44,30 @@ public class Queue {
 
             Team team = head.getValue();
             head = head.getNext();
+            count--;
             return team;
 
         }
-    }
-
-    // method used to create a bracket by adding all of the teams to it
-    public void makeBracket(Team[] team){
-
-        Queue make = new Queue();
-
-        for(int i = 0; i < team.length; i++){
-
-            make.enqueue(team[i]);
-
-        }
-    }
-
-    public Team[] PeakNextTeams(){
-
-        Team[] A = {head.value, head.next.value};
-
-        return A;
 
     }
 
-    public Team[] GetNextTeams(){
+    public int count(){
 
-        removeTwo();
+        return this.count;
 
-        return PeakNextTeams();
+    }
+    public QueueItem getHead(){
+
+        return head;
 
     }
 
-    // method used to add the winner back into the bracket
-    public void ReturnTeams(Team winner, Team loser){
+    public void setHead(QueueItem head){
 
-        Stack Losers = new Stack();
-
-        enqueue(winner);
-
-        Losers.push(loser);
+        this.head = head;
 
     }
 
-    // method used to remove both teams from the bracket
-    public Team[] removeTwo (){
 
-        if(head == null) {
-
-            return null;
-
-        }else{
-
-            Team t1 = dequeue();
-            Team t2 = dequeue();
-
-            Team[] nextTeams = new Team[2];
-
-            nextTeams[0] = t1;
-            nextTeams[1] = t2;
-            i = i - 2;
-
-            return nextTeams;
-        }
-    }
 
 }

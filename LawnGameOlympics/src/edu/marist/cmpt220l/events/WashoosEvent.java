@@ -13,7 +13,7 @@ public class WashoosEvent extends Event {
      * Construct a washoos object
      */
     public WashoosEvent(Team[] teams) {
-        super("Washoos", 21, false, 15);
+        super("Washoos", 21, false, 15, teams);
     }
 
     /**

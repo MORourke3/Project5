@@ -10,12 +10,11 @@ public class QueueItem {
     // variables to be used
     public QueueItem next;
     public Team value;
-    private Team teams;
 
 
     public QueueItem(Team teams){
 
-        this.teams = teams;
+        this.value = teams;
 
     }
 

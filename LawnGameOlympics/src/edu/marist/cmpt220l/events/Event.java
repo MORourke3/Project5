@@ -1,6 +1,7 @@
 package edu.marist.cmpt220l.events;
 
 import edu.marist.cmpt220l.Bracketing.Queue;
+import edu.marist.cmpt220l.Stacking.Stack;
 import edu.marist.cmpt220l.teams.Team;
 
 /**
@@ -11,20 +12,29 @@ public abstract class Event {
     private int playTo;
     private boolean isPlayToExact;
     private int playDistance;
-    private Queue X = new Queue();
+    private Queue B = new Queue();
+    private Stack Losers = new Stack();
 
     /**
      * Construct a new event, this should be called by whomever subclasses this class
-     *  @param name the name of the event
+     * @param name the name of the event
      * @param playTo the number of points to play to
      * @param isPlayToExact whether the number of points to play to must be exactly hit
      * @param playDistance the distance between the two areas of play
+     * @param teams
      */
-    public Event(String name, int playTo, boolean isPlayToExact, int playDistance) {
+    public Event(String name, int playTo, boolean isPlayToExact, int playDistance, Team[] teams) {
         this.name = name;
         this.playTo = playTo;
         this.isPlayToExact = isPlayToExact;
         this.playDistance = playDistance;
+
+        // iterates through the teams and creates brackets for each event
+        for(int i = 0; i < teams.length; i++){
+
+            B.enqueue(teams[i]);
+
+        }
     }
 
     /**
@@ -106,13 +116,52 @@ public abstract class Event {
         this.playDistance = playDistance;
     }
 
+    // returns top two teams on the stack
+    public Team[] PeakNextTeams(){
 
+        Team[] A = {B.getHead().value, B.getHead().next.value};
 
+        System.out.println(B.count());
 
+        return (A);
 
+    }
 
+    // dequeues the top two teams and calls the next two
+    public Team[] GetNextTeams(){
 
+        B.dequeue();
+        B.dequeue();
 
+        return PeakNextTeams();
+
+    }
+
+    // method used to add the winner back into the bracket
+    public void ReturnTeams(Team winner, Team loser){
+
+        B.enqueue(winner);
+
+        Losers.push(loser);
+
+        if(B.count() == 1){
+
+            Losers.push(B.dequeue());
+
+        }
+
+    }
+
+    // returns all the items on the stack after it is completed
+    public void popping(){
+
+        while(Losers.getTop() != null){
+
+            Losers.pop();
+
+        }
+
+    }
 
 
 

@@ -12,7 +12,7 @@ public class CornHoleEvent extends Event {
      * Construct a Corn Hole object
      */
     public CornHoleEvent(Team[] teams) {
-        super("Corn Hole", 21, false, 27);
+        super("Corn Hole", 21, false, 27, teams);
     }
 
     /**

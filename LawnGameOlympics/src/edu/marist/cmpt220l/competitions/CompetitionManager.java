@@ -7,11 +7,6 @@ import edu.marist.cmpt220l.events.EventManager;
 import edu.marist.cmpt220l.teams.Team;
 import edu.marist.cmpt220l.teams.TeamManager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-
 /**
  * This class manages a list of competitions.
  */
@@ -22,6 +17,22 @@ public class CompetitionManager {
     private Competition head;
     private Competition tail;
     private int numCompetitions;
+
+    // method to start an event
+    public void InitialRun(Event event){
+
+        Team[] teams = event.GetNextTeams();
+
+        if(teams == null){
+
+            System.out.println("Event completed");
+
+
+        }else {
+
+            this.startCompetition(event, teams[0], teams[1]);
+        }
+    }
 
     /**
      * Construct a new CompetitionManager
@@ -34,79 +45,6 @@ public class CompetitionManager {
         this.em = em;
         this.tm = tm;
     }
-
-
-    public CompetitionManager(EventManager em){
-
-        this.em = em;
-
-        Queue competitionList = new Queue();
-        competitionList.makeBracket(tm.getTeams());
-        int[] compute = new int[em.getEvents().length];
-
-        Boolean check = false;
-        int i = 0;
-
-        // user input called upon
-        BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-
-        try{
-            while (check == false){
-
-                System.out.println("What event are you playing?");
-                int Event = Integer.parseInt(userInput.readLine());
-
-                // creates an array list to hold the events
-                if(!Arrays.asList(compute).contains(Event)){
-
-                    check = true;
-                    compute[i] = Event;
-                    i++;
-
-                }
-
-                // choose a number to start an event
-                if (Event > em.getEvents().length){
-
-                    System.out.println("Choose a number between 1 and 6");
-
-                }else{
-
-                    System.out.println("Starting " + em.getOne(Event));
-                    Event currEvent = em.getOne(Event);
-
-                }
-
-                // get top two teams and dequeue both
-                // put the winner back and the loser on the stack
-                while(competitionList.PeakNextTeams() != null){
-
-                    Stack A = new Stack();
-                    Team[] playing = competitionList.removeTwo();
-
-                    Team t1 = playing[0];
-                    Team t2 = playing[1];
-
-                   // commented out because it is not working and i'm not sure how to get it working
-                   /* Team[] result = need_a_method_here (em.getOne(Event), t1, t2);
-
-                    competitionList.enqueue(result[0]);
-                    A.push(result[1]);*/
-
-                }
-
-            }
-
-
-        }catch(IOException ioe){
-
-            System.out.println("Error reading command");
-
-        }
-    }
-
-
-
 
     /**
      * Start a new competition, this competition will exist until endCompetition is called
@@ -158,8 +96,13 @@ public class CompetitionManager {
      * @param competition the competition to end
      * @param winningTeam the team that won the competition
      */
-    public void endCompetition(ICompetition competition, Team winningTeam)
+    public void endCompetition(ICompetition competition, Team winningTeam, Team losingTeam)
     {
+
+        competition.getEvent().ReturnTeams(winningTeam, losingTeam);
+
+
+
         Competition currItem = head;
 
         //find the item (or find the end of the list
@@ -192,6 +135,12 @@ public class CompetitionManager {
             currItem.getHomeTeam().incrementLosses();
             currItem.getAwayTeam().incrementWins();
         }
+
+            InitialRun(competition.getEvent());
+
+            System.out.println("Winners");
+            Event.popping();
+
     }
 
     /**

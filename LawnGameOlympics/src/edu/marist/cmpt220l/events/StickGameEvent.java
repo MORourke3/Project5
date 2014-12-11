@@ -12,7 +12,7 @@ public class StickGameEvent extends Event {
      * Construct the stick game event
      */
     public StickGameEvent(Team[] teams) {
-        super("Stick Game", 11, false, 25);
+        super("Stick Game", 11, false, 25, teams);
     }
 
     /**

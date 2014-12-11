@@ -1,6 +1,7 @@
 package edu.marist.cmpt220l;
 
 import edu.marist.cmpt220l.Bracketing.Queue;
+import edu.marist.cmpt220l.competitions.Competition;
 import edu.marist.cmpt220l.competitions.CompetitionManager;
 import edu.marist.cmpt220l.competitions.ICompetition;
 import edu.marist.cmpt220l.events.Event;
@@ -46,6 +47,14 @@ public class Main {
      */
     public void Run()
     {
+
+        cm.InitialRun(em.getEvents()[0]);
+        cm.InitialRun(em.getEvents()[1]);
+        cm.InitialRun(em.getEvents()[2]);
+        cm.InitialRun(em.getEvents()[3]);
+        cm.InitialRun(em.getEvents()[4]);
+        cm.InitialRun(em.getEvents()[5]);
+
         //display the title
         System.out.println("Welcome to Lawn Game Olympics");
         System.out.println("-----------------------------");
@@ -70,9 +79,6 @@ public class Main {
                     listTeams();
                 else if("c".equals(line) || "competitions".equals(line))
                     listCompetitions();
-                else if("sc".equals(line) || "startcompetition".equals(line))
-                    System.out.println("replacing sc because it is commented out");
-                    //startCompetition();
                 else if("ec".equals(line) || "endcompetition".equals(line))
                     endCompetition();
                 else if("h".equals(line) || "help".equals(line))
@@ -161,14 +167,14 @@ public class Main {
      *
      * @throws IOException
      */
-    /*private void startCompetition() throws IOException
+   /* private void startCompetition() throws IOException
     {
         System.out.println("Lawn Game Olympics New Competition");
         System.out.println();
         Event[] freeEvents = cm.getFreeEvents();
         Team[] freeTeams = cm.getFreeTeams();
 
-        if(freeEvents.length < 1)
+        /*if(freeEvents.length < 1)
         {
             System.out.println("No free event, you must end an event before starting a new one");
             return;
@@ -231,7 +237,9 @@ public class Main {
                 System.out.println("Input must be a number between 1 and " + freeTeams.length);
         } while(!isValidInput);
 
-        cm.startCompetition(freeEvents[eventIdx-1], freeTeams[homeTeamIdx-1], freeTeams[awayTeamIdx-1]);
+        em.startCompetition(freeEvents[eventIdx-1], freeTeams[homeTeamIdx-1], freeTeams[awayTeamIdx-1]);
+
+
     }*/
 
     /**
@@ -299,7 +307,9 @@ public class Main {
         } while(!isValidInput);
 
         Team winningTeam = (winningTeamIdx == 1 ? competition.getHomeTeam() : competition.getAwayTeam());
-        cm.endCompetition(competition, winningTeam);
+        Team losingTeam = (winningTeamIdx == 1 ? competition.getAwayTeam() : competition.getHomeTeam());
+        cm.endCompetition(competition, winningTeam, losingTeam);
+
     }
 
     /**
@@ -315,7 +325,6 @@ public class Main {
         System.out.println("e   events            List the events in the system");
         System.out.println("t   teams             List the teams in the system");
         System.out.println("c   competitions      List the current competitions in the system");
-        System.out.println("sc  startcompetition  Start a new competition");
         System.out.println("ec  endcompetition    End a currently running competition");
         System.out.println("h   help              Show this help screen");
         System.out.println("q   quit              Quit the program");

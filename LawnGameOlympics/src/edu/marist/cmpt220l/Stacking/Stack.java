@@ -11,7 +11,7 @@ public class Stack {
 
     private StackItem top;
 
-
+    // pushes a team onto the stack
     public void push(Team team){
 
         StackItem X = new StackItem(team);
@@ -28,12 +28,14 @@ public class Stack {
         }
     }
 
+    // pops a team off of the stack
     public Team pop(){
 
         Team pop = null;
 
         if(top != null){
 
+            System.out.println(top.value);
             pop = top.value;
             top = top.next;
 
@@ -43,15 +45,10 @@ public class Stack {
 
     }
 
-    /*public static void main(String[] args){
+    public StackItem getTop(){
 
-        Stack newStack = new Stack();
+        return top;
 
-        newStack.push(new Team(new Olympian("chad", Sex.MALE, 17), new Olympian("George", Sex.MALE, 17)));
-
-
-    }*/
-
-
+    }
 
 }

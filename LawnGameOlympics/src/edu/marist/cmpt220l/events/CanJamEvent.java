@@ -13,7 +13,7 @@ public class CanJamEvent extends Event {
      * Construct a new CanJam event
      */
     public CanJamEvent(Team[] teams) {
-        super("Can Jam", 21, true, 50);
+        super("Can Jam", 21, true, 50, teams);
     }
 
     /**
