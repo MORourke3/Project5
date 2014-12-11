@@ -1,5 +1,7 @@
 package edu.marist.cmpt220l.events;
 
+import edu.marist.cmpt220l.teams.Team;
+
 /**
  * The Stick Game event
  */
@@ -9,7 +11,7 @@ public class StickGameEvent extends Event {
     /**
      * Construct the stick game event
      */
-    public StickGameEvent() {
+    public StickGameEvent(Team[] teams) {
         super("Stick Game", 11, false, 25);
     }
 

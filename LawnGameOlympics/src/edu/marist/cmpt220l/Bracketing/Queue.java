@@ -1,5 +1,6 @@
 package edu.marist.cmpt220l.Bracketing;
 
+import edu.marist.cmpt220l.Stacking.Stack;
 import edu.marist.cmpt220l.teams.Team;
 
 /**
@@ -11,6 +12,7 @@ public class Queue {
     private QueueItem head;
     private QueueItem tail;
     private QueueItem currItem;
+    private int i = 0;
 
     // method used to add a team to the queue
     public void enqueue(Team team){
@@ -59,32 +61,53 @@ public class Queue {
         }
     }
 
-    // method used to remove both teams from the bracket
-    public void removeTwo (){
+    public Team[] PeakNextTeams(){
 
-        Queue remove = new Queue();
+        Team[] A = {head.value, head.next.value};
 
-        for(int i = 0; i < 1; i++){
+        return A;
 
-            remove.dequeue();
-            remove.dequeue();
+    }
 
-        }
+    public Team[] GetNextTeams(){
+
+        removeTwo();
+
+        return PeakNextTeams();
+
     }
 
     // method used to add the winner back into the bracket
-    public void addWinnerBack (Team team1){
+    public void ReturnTeams(Team winner, Team loser){
 
-        enqueue(team1);
+        Stack Losers = new Stack();
+
+        enqueue(winner);
+
+        Losers.push(loser);
 
     }
 
+    // method used to remove both teams from the bracket
+    public Team[] removeTwo (){
 
+        if(head == null) {
 
+            return null;
 
+        }else{
 
+            Team t1 = dequeue();
+            Team t2 = dequeue();
 
+            Team[] nextTeams = new Team[2];
 
+            nextTeams[0] = t1;
+            nextTeams[1] = t2;
+            i = i - 2;
 
+            return nextTeams;
+        }
+    }
 
 }

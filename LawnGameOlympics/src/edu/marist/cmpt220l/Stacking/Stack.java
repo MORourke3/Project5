@@ -16,7 +16,7 @@ public class Stack {
 
         StackItem X = new StackItem(team);
 
-        if(top == null){
+        if(top != null){
 
             top = X;
 

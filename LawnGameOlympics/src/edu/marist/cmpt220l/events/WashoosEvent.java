@@ -1,5 +1,7 @@
 package edu.marist.cmpt220l.events;
 
+import edu.marist.cmpt220l.teams.Team;
+
 /**
  * The Washoos event
  */
@@ -10,7 +12,7 @@ public class WashoosEvent extends Event {
     /**
      * Construct a washoos object
      */
-    public WashoosEvent() {
+    public WashoosEvent(Team[] teams) {
         super("Washoos", 21, false, 15);
     }
 

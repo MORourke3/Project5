@@ -1,5 +1,7 @@
 package edu.marist.cmpt220l.events;
 
+import edu.marist.cmpt220l.teams.Team;
+
 /**
  * The Corn Hole event
  */
@@ -9,7 +11,7 @@ public class CornHoleEvent extends Event {
     /**
      * Construct a Corn Hole object
      */
-    public CornHoleEvent() {
+    public CornHoleEvent(Team[] teams) {
         super("Corn Hole", 21, false, 27);
     }
 

@@ -37,7 +37,7 @@ public class Main {
     {
         om = new OlympianManager(filePath);
         tm = new TeamManager(om);
-        em = new EventManager();
+        em = new EventManager(tm);
         cm = new CompetitionManager(em, tm);
     }
 
@@ -71,7 +71,8 @@ public class Main {
                 else if("c".equals(line) || "competitions".equals(line))
                     listCompetitions();
                 else if("sc".equals(line) || "startcompetition".equals(line))
-                    startCompetition();
+                    System.out.println("replacing sc because it is commented out");
+                    //startCompetition();
                 else if("ec".equals(line) || "endcompetition".equals(line))
                     endCompetition();
                 else if("h".equals(line) || "help".equals(line))
@@ -160,7 +161,7 @@ public class Main {
      *
      * @throws IOException
      */
-    private void startCompetition() throws IOException
+    /*private void startCompetition() throws IOException
     {
         System.out.println("Lawn Game Olympics New Competition");
         System.out.println();
@@ -231,7 +232,7 @@ public class Main {
         } while(!isValidInput);
 
         cm.startCompetition(freeEvents[eventIdx-1], freeTeams[homeTeamIdx-1], freeTeams[awayTeamIdx-1]);
-    }
+    }*/
 
     /**
      * End an existing competition
