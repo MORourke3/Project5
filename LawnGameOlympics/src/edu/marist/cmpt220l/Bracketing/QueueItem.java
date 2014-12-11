@@ -9,7 +9,7 @@ public class QueueItem {
 
     // variables to be used
     public QueueItem next;
-    public int value;
+    public Team value;
     private Team teams;
 
 
@@ -31,13 +31,13 @@ public class QueueItem {
 
     }
 
-    public int getValue() {
+    public Team getValue() {
 
         return value;
 
     }
 
-    public void setValue(int value) {
+    public void setValue(Team value) {
 
         this.value = value;
 

@@ -15,11 +15,11 @@ public class Queue {
     // method used to add a team to the queue
     public void enqueue(Team team){
 
-        QueueItem A = head = tail = currItem = new QueueItem(team);
+        QueueItem A = new QueueItem(team);
 
         if(head == null){
 
-            head = tail = A;
+            head = tail = currItem = A;
 
         }else{
 
@@ -31,18 +31,18 @@ public class Queue {
     }
 
     // method used to remove a team from the queue
-    public int dequeue(){
+    public Team dequeue(){
 
         if(head == null){
 
             System.out.println("No items on the list");
-            return 0;
+            return null;
 
         }else{
 
-            int Int = head.getValue();
+            Team team = head.getValue();
             head = head.getNext();
-            return Int;
+            return team;
 
         }
     }
@@ -60,14 +60,14 @@ public class Queue {
     }
 
     // method used to remove both teams from the bracket
-    public void removeTwo (Team team1, Team team2){
+    public void removeTwo (){
 
         Queue remove = new Queue();
 
         for(int i = 0; i < 1; i++){
 
-            remove.dequeue(team1);
-            remove.dequeue(team2);
+            remove.dequeue();
+            remove.dequeue();
 
         }
     }
